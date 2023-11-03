@@ -13,6 +13,8 @@ class PaginaController extends Controller
     public function index()
     {
         //
+        $pagina = new Pagina(); 
+        return $pagina->all();
     }
 
     /**

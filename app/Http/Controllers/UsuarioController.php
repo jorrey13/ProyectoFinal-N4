@@ -12,15 +12,24 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        //
+        $usuario = new Usuario(); 
+        return $usuario->all();
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
         //
+        $usuario = new Usuario(); 
+        $usuario->clave = $request->clave;
+        $usuario->habilitado = $request->habilitado;       
+        $usuario->fecha = $request->fecha;       
+        $usuario->id_rol = $request->id_rol;
+        $usuario->id_persona = $request->id_persona;
+        $usuario->save();       
+        return $usuario;    
     }
 
     /**
@@ -34,9 +43,10 @@ class UsuarioController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Usuario $usuario)
+    public function show($id)
     {
-        //
+        $usuario = new Usuario();
+        return $usuario->find($id);
     }
 
     /**
@@ -50,16 +60,25 @@ class UsuarioController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Usuario $usuario)
+    public function update($id, Request $request)
     {
-        //
+        $usuario = Usuario::find($id);
+        $usuario->clave = $request->clave;
+        $usuario->habilitado = $request->habilitado;       
+        $usuario->fecha = $request->fecha;       
+        $usuario->id_rol = $request->id_rol;
+        $usuario->id_persona = $request->id_persona;
+        $usuario->save();
+        return $usuario;
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Usuario $usuario)
+    public function destroy($id)
     {
-        //
+        $usuario = Usuario::find($id);
+        $usuario->delete();
+        return $usuario;
     }
 }

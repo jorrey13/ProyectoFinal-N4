@@ -13,14 +13,19 @@ class RolController extends Controller
     public function index()
     {
         //
+        $rol = new Rol(); 
+        return $rol->all();
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $rol = new Rol(); 
+        $rol->nombre = $request->nombre;
+        $rol->save();       
+        return $rol;       
     }
 
     /**
@@ -34,10 +39,12 @@ class RolController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Rol $rol)
+    public function show($id)
     {
-        //
+        $rol = new Rol();
+        return $rol->find($id);
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -50,16 +57,21 @@ class RolController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Rol $rol)
+    public function update($id, Request $request)
     {
-        //
+        $rol = Rol::find($id);        
+        $rol->nombre = $request->nombre;
+        $rol->save();
+        return $rol;
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Rol $rol)
+    public function destroy($id)
     {
-        //
+        $rol = Rol::find($id);
+        $rol->delete();
+        return $rol;
     }
 }
